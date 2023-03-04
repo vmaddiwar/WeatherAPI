@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>Weather</title>
+
+</head>
+<body bgcolor="#ADD8E6">
+
+	<form id="weatherForm" name="weatherForm"
+		action="/weather/getWeatherByZip">
+		<table style="margin-left:auto;margin-right: auto;">
+			<tr>
+				<td>Zip code:<input type="text" name="zipCode" id="zipCode"
+					style="height: 20px; line-height: 20px; margin-left: 15px;" th:value="${zipCode}" />
+				
+				<input id="weatherButton" type="submit"
+					onclick="location.href='/weather/getWeatherByZip';"
+					value="Get Weather" /></td>
+			</tr>
+		</table>
+		
+		<div th:if="${cityName!=null and !cityName.isEmpty()}">
+			<table  style="margin-left:auto;margin-right: auto;">
+				<tr>
+					<td><h2>
+							City Name: <label th:text="${cityName}" />
+						</h2>
+					</td>
+				</tr>					
+				<tr>
+					<td><h2>
+							Current Weather: <label th:text="${temp}" />
+						</h2>
+					</td>
+				</tr>
+				<tr>
+					<td><h2>
+							Feels Like: <label th:text="${feels}" />
+						</h2>
+					</td>
+				</tr>
+				<tr>
+					<td><h2>
+							Humidity: <label th:text="${humidity}" />
+						</h2>
+					</td>
+				</tr>
+					
+			</table>
+		</div>
+		
+		<div th:if="${cityName==null and zipCode!=null and !zipCode.isEmpty()}">
+			<table style="margin-left:auto;margin-right: auto;">
+				<tr>
+					<td><h2>
+							No Data Found!
+						</h2>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div th:if="${invalidZipCode=='TRUE'}">
+			<table style="margin-left:auto;margin-right: auto;">
+				<tr>
+					<td><h2>
+							Zipcode is invalid!
+						</h2>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+	</form>
+</body>
+</html>
